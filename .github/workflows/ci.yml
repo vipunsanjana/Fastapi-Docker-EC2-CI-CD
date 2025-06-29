@@ -37,13 +37,12 @@ jobs:
         mkdir -p ~/.ssh
         echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa.pem
         chmod 600 ~/.ssh/id_rsa.pem
-        ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa.pem ubuntu@<EC2_PUBLIC_IP> << 'EOF'
-        cd /home/ubuntu/fastapi-crud || git clone https://github.com/vipunsanjana/Github-Actions-Python-EC2.git
-        cd fastapi-crud
-        git pull origin main
-        source ~/venv/bin/activate || python3 -m venv ~/venv && source ~/venv/bin/activate
-        pip install -r requirements.txt
-        pkill uvicorn || true
-        nohup uvicorn app.main:app --host 0.0.0.0 --port 8000 > app.log 2>&1 &
+        ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa.pem ubuntu@"$EC2_PUBLIC_IP" << 'EOF'
+          cd /home/ubuntu/fastapi-crud || git clone https://github.com/vipunsanjana/Github-Actions-Python-EC2.git
+          cd fastapi-crud
+          git pull origin main
+          source ~/venv/bin/activate || python3 -m venv ~/venv && source ~/venv/bin/activate
+          pip install -r requirements.txt
+          pkill uvicorn || true
+          nohup uvicorn app.main:app --host 0.0.0.0 --port 8000 > app.log 2>&1 &
         EOF
-
