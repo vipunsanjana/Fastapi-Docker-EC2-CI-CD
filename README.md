@@ -14,4 +14,4 @@ A simple FastAPI application demonstrating CRUD operations on users, with a CI p
 ---
 
 ## Contact
-- Vipun Sanjana(Former Intern SE at WSO2 - Cloud SEcurity Operations Center)
+- Vipun Sanjana( Former Intern SE at WSO2 - Cloud SEcurity Operations Center )
