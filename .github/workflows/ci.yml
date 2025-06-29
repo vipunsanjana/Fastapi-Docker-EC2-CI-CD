@@ -3,39 +3,23 @@ name: FastAPI CI and Deploy
 on:
   push:
     branches: [main]
-  pull_request:
-    branches: [main]
 
 jobs:
   build-and-deploy:
-    runs-on: self-hosted  
+    runs-on: self-hosted
 
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
 
-    - name: Set up Python 3.11
-      uses: actions/setup-python@v5
-      with:
-        python-version: '3.11'
+    - name: Build Docker image
+      run: docker build -t fastapi-app .
 
-    - name: Install dependencies
+    - name: Stop and remove existing container (if any)
       run: |
-        pip install --upgrade pip
-        pip install -r requirements.txt
+        docker stop fastapi-app || true
+        docker rm fastapi-app || true
 
-    - name: Run tests
+    - name: Run Docker container
       run: |
-        echo "Running basic import test"
-        python -c "import app.main"
-
-    - name: Deploy App
-      run: |
-        cd ~/fastapi-crud || git clone https://github.com/vipunsanjana/Github-Actions-Python-EC2.git ~/fastapi-crud
-        cd ~/fastapi-crud
-        git pull origin main
-        source ~/venv/bin/activate || python3 -m venv ~/venv && source ~/venv/bin/activate
-        pip install -r requirements.txt
-        pkill uvicorn || true
-        nohup uvicorn app.main:app --host 0.0.0.0 --port 8000 > app.log 2>&1 &
-
+        docker run -d --restart unless-stopped -p 80:80 --name fastapi-app fastapi-app
