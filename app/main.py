@@ -39,6 +39,6 @@ def update_user(user_id: int, updated: UpdateUser):
 def delete_user(user_id: int):
     user = get_user_by_id(user_id)
     if not user:
-        raise HTTPException(status_code=404, detail="User not found")
+        raise HTTPException(status_code=404, detail="Cannot delete, user not found")
     users.remove(user)
     return {"detail": f"User with ID {user_id} deleted"}
