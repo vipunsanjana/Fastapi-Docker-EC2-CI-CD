@@ -1,0 +1,34 @@
+# Byte-compiled / cache files
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environment
+venv/
+ENV/
+env/
+*.env
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# IDEs
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Python egg
+*.egg-info/
+
+# Coverage / test reports
+.coverage
+htmlcov/
+.pytest_cache/
+
+# Docker
+*.pid
+*.tar
+*.img

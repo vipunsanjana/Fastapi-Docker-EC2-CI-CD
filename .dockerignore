@@ -1,0 +1,26 @@
+# Ignore Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore venvs
+venv/
+ENV/
+env/
+
+# Git & IDE files
+.git
+.gitignore
+.vscode/
+.idea/
+
+# Ignore logs and test cache
+*.log
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Ignore Docker artifacts
+*.tar
+*.img
